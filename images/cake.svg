@@ -1,0 +1,24 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cake Base -->
+  <rect x="30" y="100" width="140" height="60" rx="5" ry="5" fill="#F2D2B7"/>
+
+  <!-- Icing -->
+  <path d="M 30 100 Q 40 90, 50 100 T 70 100 T 90 100 T 110 100 T 130 100 T 150 100 T 170 100 L 170 105 L 30 105 Z" fill="#FFFFFF"/>
+
+  <!-- Middle Layer -->
+  <rect x="30" y="120" width="140" height="10" fill="#E0A98F"/>
+
+  <!-- Candle -->
+  <rect x="95" y="60" width="10" height="40" fill="#f9a602"/>
+  <rect x="92" y="65" width="16" height="5" fill="#f7d038" />
+  <rect x="92" y="75" width="16" height="5" fill="#f7d038" />
+  <rect x="92" y="85" width="16" height="5" fill="#f7d038" />
+
+
+  <!-- Flame -->
+  <g id="flame-group">
+      <path id="flame-outer" d="M 100,60 C 105,50 105,40 100,30 C 95,40 95,50 100,60 Z" fill="#FFD700" />
+      <path id="flame-inner" d="M 100,60 C 103,53 103,47 100,40 C 97,47 97,53 100,60 Z" fill="#FFB347" />
+      <path id="flame-core" d="M 100,55 C 102,51 102,49 100,45 C 98,49 98,51 100,55 Z" fill="#FF4500" />
+  </g>
+</svg> 
