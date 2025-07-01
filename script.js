@@ -41,34 +41,58 @@ showStageImage(currentIndex, 'fade-in');
 // Auto-advance every 3 seconds
 setInterval(nextImage, 3000);
 
-// --- Envelope Open Logic ---
-const envelopeOverlay = document.getElementById('envelope-overlay');
-const envelope = document.querySelector('.envelope');
-const openEnvelopeBtn = document.getElementById('open-envelope-btn');
+// --- Door Open Logic ---
+const doorOverlay = document.getElementById('door-overlay');
+const door = document.getElementById('door');
+const doorPanel = door ? door.querySelector('.door-panel') : null;
 const mainContent = document.querySelector('.main-content');
-const wishesSection = document.querySelector('.wishes-animated');
 const birthdayAudio = document.getElementById('birthday-audio');
+const wishesSection = document.querySelector('.wishes-animated');
+const container = document.querySelector('.fireworks-container');
 
-if (openEnvelopeBtn) {
-    openEnvelopeBtn.addEventListener('click', () => {
-        envelope.classList.add('open');
+if (door) {
+    const openAction = () => {
+        door.classList.add('open');
         setTimeout(() => {
-            envelopeOverlay.style.opacity = 0;
+            if (doorOverlay) doorOverlay.style.opacity = 0;
             setTimeout(() => {
-                envelopeOverlay.style.display = 'none';
+                if (doorOverlay) doorOverlay.style.display = 'none';
                 if (mainContent) mainContent.style.display = 'block';
+                if (wishesSection) wishesSection.classList.add('show');
+                if (container && typeof Fireworks !== 'undefined') {
+                    const fireworks = new Fireworks.default(container, {
+                        rocketsPoint: { min: 50, max: 50 },
+                        hue: { min: 0, max: 360 },
+                        delay: { min: 0.015, max: 0.03 },
+                        speed: 2,
+                        acceleration: 1.05,
+                        friction: 0.95,
+                        gravity: 1.5,
+                        particles: 50,
+                        traceLength: 3,
+                        flickering: 50,
+                        opacity: 0.5,
+                        explosion: 5,
+                        intensity: 5,
+                        lineWidth: {
+                            explosion: { min: 1, max: 3 },
+                            trace: { min: 0.1, max: 1 }
+                        },
+                        mouse: { click: false, move: false, max: 1 }
+                    });
+                    fireworks.start();
+                    setTimeout(() => { fireworks.stop(); }, 8000);
+                }
                 if (birthdayAudio) {
                     birthdayAudio.currentTime = 0;
-                    birthdayAudio.play();
+                    birthdayAudio.play().catch(() => {});
                     birthdayAudio.loop = true;
                 }
-                // Animate wishes section
-                setTimeout(() => {
-                    if (wishesSection) wishesSection.classList.add('show');
-                }, 400);
-            }, 700);
-        }, 900); // Wait for flap animation
-    });
+            }, 900);
+        }, 1200); // Wait for door animation
+    };
+    door.addEventListener('click', openAction);
+    door.addEventListener('touchend', openAction);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

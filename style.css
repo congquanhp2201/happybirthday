@@ -329,28 +329,32 @@ p {
     position: absolute;
     top: 30px; left: 50%;
     transform: translateX(-50%);
-    width: 85%;
-    background: repeating-linear-gradient(135deg, #fff 0 10px, #f9e7f7 10px 20px);
-    border-radius: 16px;
-    box-shadow: 0 4px 24px 0 rgba(231,60,126,0.10), 0 2px 8px rgba(0,0,0,0.08);
-    padding: 36px 24px 24px 24px;
-    z-index: 4;
+    width: 88%;
+    min-height: 120px;
+    background: rgba(255,255,255,0.75);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(60,60,126,0.10), 0 2px 8px rgba(0,0,0,0.08);
+    padding: 32px 18px 18px 18px;
+    z-index: 5;
     text-align: center;
     opacity: 1;
+    border: 1.5px solid #e73c7e;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.15em;
+    color: #3a3a3a;
+    letter-spacing: 0.2px;
+    backdrop-filter: blur(8px);
     transition: opacity 0.7s 0.3s;
-    border: 2px solid #e73c7e;
-    font-family: 'Great Vibes', cursive, 'Georgia', serif;
-    font-size: 1.5em;
-    color: #af4261;
-    letter-spacing: 1px;
 }
 .envelope-letter h2 {
-    font-family: 'Great Vibes', cursive, 'Georgia', serif;
-    font-size: 2.2em;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.4em;
     color: #e73c7e;
     margin-bottom: 0.5em;
     margin-top: 0;
-    text-shadow: 0 2px 8px #fff7b2, 0 1px 0 #fff;
+    text-shadow: none;
+    letter-spacing: 0.5px;
+    font-weight: 700;
 }
 .envelope.open .envelope-letter {
     opacity: 0;
@@ -358,21 +362,32 @@ p {
 }
 #open-envelope-btn {
     margin-top: 18px;
-    padding: 10px 30px;
-    font-size: 1.2em;
+    padding: 0 28px;
+    height: 44px;
+    border-radius: 22px;
     background: linear-gradient(90deg, #e73c7e 60%, #f3ec78 100%);
     color: #fff;
     border: none;
-    border-radius: 20px;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-    transition: background 0.2s;
-    font-family: 'Georgia', serif;
-    font-weight: bold;
-    letter-spacing: 1px;
+    transition: background 0.2s, transform 0.2s;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+#open-envelope-btn::before {
+    content: '\1F4E8';
+    font-size: 1.2em;
+    display: inline-block;
 }
 #open-envelope-btn:hover {
     background: linear-gradient(90deg, #af4261 60%, #f3ec78 100%);
+    transform: scale(1.04);
 }
 
 /* Wishes Animation */
@@ -384,4 +399,190 @@ p {
 .wishes-animated.show {
     opacity: 1;
     transform: translateY(0) scale(1);
+}
+
+@media (max-width: 500px) {
+  .envelope-letter {
+    font-size: 1em;
+    padding: 14px 4px 10px 4px;
+    min-height: 80px;
+  }
+  #open-envelope-btn {
+    font-size: 1em;
+    height: 38px;
+    padding: 0 16px;
+  }
+}
+
+/* Door Overlay Styles */
+.door-overlay {
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #f3ec78 0%, #e73c7e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.7s;
+    flex-direction: column;
+}
+.door-frame {
+    background: #f5ede6;
+    border: 4px solid #e0d6ce;
+    border-radius: 6px 6px 0 0;
+    padding: 16px 12px 0 12px;
+    box-shadow: 0 8px 32px 0 rgba(60,60,126,0.10), 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.door-step {
+    width: 220px;
+    height: 18px;
+    background: #bdbdbd;
+    border-radius: 0 0 6px 6px;
+    margin: 0 auto -8px auto;
+    box-shadow: 0 2px 8px rgba(60,60,126,0.10);
+}
+.door {
+    width: 200px;
+    height: 320px;
+    perspective: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 auto;
+}
+.door-panel {
+    width: 100%;
+    height: 100%;
+    background: #a9442e;
+    border-radius: 2px;
+    border: 3px solid #7c2f1c;
+    position: relative;
+    transform-origin: left center;
+    transition: transform 1.2s cubic-bezier(.77,0,.18,1.01);
+    overflow: visible;
+    box-shadow: 0 4px 16px 0 rgba(60,60,126,0.10), 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.door.open .door-panel {
+    transform: rotateY(-100deg);
+}
+.door-window {
+    width: 120px;
+    height: 120px;
+    background: #4fc3f7;
+    border-radius: 4px;
+    border: 4px solid #fff;
+    margin: 28px auto 0 auto;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(60,60,126,0.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.window-grid {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+}
+.window-grid .grid-row {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: #7c2f1c;
+}
+.window-grid .grid-row:nth-child(1) { top: 24px; }
+.window-grid .grid-row:nth-child(2) { top: 48px; }
+.window-grid .grid-row:nth-child(3) { top: 72px; }
+.window-grid .grid-row:nth-child(4) { top: 96px; }
+.window-grid .grid-row:nth-child(5) { top: 0; height: 100%; background: none; }
+.window-grid .grid-col {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: #7c2f1c;
+}
+.window-grid .grid-col:nth-child(6) { left: 30px; }
+.window-grid .grid-col:nth-child(7) { left: 60px; }
+.window-grid .grid-col:nth-child(8) { left: 90px; }
+.door-knob {
+    position: absolute;
+    right: 18px;
+    bottom: 60px;
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle at 60% 40%, #f3ec78 80%, #e7b13c 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(231,60,126,0.15);
+    border: 2px solid #fffbe6;
+    z-index: 2;
+}
+.door-message {
+    margin-top: 18px;
+    text-align: center;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.3em;
+    color: #2196f3;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    padding: 0 18px;
+    z-index: 3;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.5);
+    line-height: 1.3;
+}
+.door-message span {
+    display: block;
+    font-size: 0.98em;
+    color: #555;
+    margin-top: 0.7em;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    text-shadow: none;
+}
+@media (max-width: 500px) {
+  .door-frame {
+    padding: 6px 2px 0 2px;
+  }
+  .door-step {
+    width: 120px;
+    height: 10px;
+  }
+  .door {
+    width: 110px;
+    height: 180px;
+  }
+  .door-panel {
+    border-radius: 2px;
+  }
+  .door-window {
+    width: 60px;
+    height: 60px;
+    border-radius: 2px;
+    margin: 12px auto 0 auto;
+  }
+  .window-grid .grid-row:nth-child(1) { top: 12px; }
+  .window-grid .grid-row:nth-child(2) { top: 24px; }
+  .window-grid .grid-row:nth-child(3) { top: 36px; }
+  .window-grid .grid-row:nth-child(4) { top: 48px; }
+  .window-grid .grid-col:nth-child(6) { left: 15px; }
+  .window-grid .grid-col:nth-child(7) { left: 30px; }
+  .window-grid .grid-col:nth-child(8) { left: 45px; }
+  .door-knob {
+    width: 12px;
+    height: 12px;
+    right: 8px;
+    bottom: 24px;
+  }
+  .door-message {
+    font-size: 1em;
+    padding: 0 6px;
+  }
 } 
