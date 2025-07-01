@@ -547,63 +547,89 @@ p {
     letter-spacing: 0.1px;
     text-shadow: none;
 }
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+  .door-overlay {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 8vh;
+  }
   .door-frame {
+    width: 90vw;
+    min-width: 120px;
+    max-width: 320px;
     padding: 2vw 1vw 0 1vw;
     border-width: 2px;
     border-radius: 4px 4px 0 0;
-    min-width: 0;
-    width: 98vw;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .door-step {
-    width: 70vw;
-    min-width: 80px;
-    max-width: 200px;
+    width: 60vw;
+    min-width: 60px;
+    max-width: 180px;
     height: 7vw;
     max-height: 16px;
     min-height: 8px;
   }
   .door {
-    width: 60vw;
-    min-width: 70px;
-    max-width: 160px;
-    height: 45vw;
-    min-height: 110px;
-    max-height: 260px;
+    width: 56vw;
+    min-width: 60px;
+    max-width: 140px;
+    height: 40vw;
+    min-height: 100px;
+    max-height: 220px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .door-panel {
     border-radius: 2px;
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
   .door-window {
-    width: 32vw;
-    min-width: 32px;
-    max-width: 70px;
-    height: 32vw;
-    min-height: 32px;
-    max-height: 70px;
+    width: 28vw;
+    min-width: 28px;
+    max-width: 60px;
+    height: 28vw;
+    min-height: 28px;
+    max-height: 60px;
     border-radius: 2px;
-    margin: 8vw auto 0 auto;
+    margin: 7vw auto 0 auto;
   }
-  .window-grid .grid-row:nth-child(1) { top: 6vw; }
-  .window-grid .grid-row:nth-child(2) { top: 12vw; }
-  .window-grid .grid-row:nth-child(3) { top: 18vw; }
-  .window-grid .grid-row:nth-child(4) { top: 24vw; }
-  .window-grid .grid-col:nth-child(6) { left: 8vw; }
-  .window-grid .grid-col:nth-child(7) { left: 16vw; }
-  .window-grid .grid-col:nth-child(8) { left: 24vw; }
+  .window-grid .grid-row:nth-child(1) { top: 5vw; }
+  .window-grid .grid-row:nth-child(2) { top: 10vw; }
+  .window-grid .grid-row:nth-child(3) { top: 15vw; }
+  .window-grid .grid-row:nth-child(4) { top: 20vw; }
+  .window-grid .grid-col:nth-child(6) { left: 7vw; }
+  .window-grid .grid-col:nth-child(7) { left: 14vw; }
+  .window-grid .grid-col:nth-child(8) { left: 21vw; }
   .door-knob {
     width: 5vw;
     min-width: 10px;
-    max-width: 18px;
+    max-width: 16px;
     height: 5vw;
     min-height: 10px;
-    max-height: 18px;
-    right: 4vw;
-    bottom: 10vw;
+    max-height: 16px;
+    right: 3vw;
+    bottom: 8vw;
   }
   .door-message {
     font-size: 1em;
     padding: 0 6px;
+    margin-top: 18px;
+    position: static;
+    width: 100vw;
+    max-width: 340px;
+    box-sizing: border-box;
   }
 } 
