@@ -7,43 +7,69 @@ const images = [
     'images/511331338_1376127396982653_3067860492689008629_n.jpg'
 ];
 
-let slideIndex = 0;
-const slideshowContainer = document.querySelector('.slideshow-container');
+// --- Stage Slideshow Logic ---
+const stageImage = document.getElementById('stage-image');
+const animations = [
+    'fade-in',
+    'zoom-in',
+    'rotate-in',
+    'slide-in-left',
+    'slide-in-right'
+];
+let currentIndex = 0;
 
-function createSlides() {
-    if (images.length === 0) {
-        slideshowContainer.innerHTML = '<p>Please add images to the "images" folder and update script.js</p>';
-        return;
-    }
+function showStageImage(index, animation) {
+    if (!stageImage) return;
+    stageImage.className = '';
+    stageImage.style.opacity = 0;
+    setTimeout(() => {
+        stageImage.src = images[index];
+        stageImage.classList.add(animation);
+        stageImage.style.opacity = 1;
+    }, 100);
+}
 
-    images.forEach((src, index) => {
-        const slide = document.createElement('div');
-        slide.classList.add('slide');
-        if (index === 0) {
-            slide.style.display = "block";
-        }
-        const img = document.createElement('img');
-        img.src = src;
-        slide.appendChild(img);
-        slideshowContainer.appendChild(slide);
+function nextImage() {
+    const anim = animations[Math.floor(Math.random() * animations.length)];
+    currentIndex = (currentIndex + 1) % images.length;
+    showStageImage(currentIndex, anim);
+}
+
+// Show the first image with an animation on load
+showStageImage(currentIndex, 'fade-in');
+
+// Auto-advance every 3 seconds
+setInterval(nextImage, 3000);
+
+// --- Envelope Open Logic ---
+const envelopeOverlay = document.getElementById('envelope-overlay');
+const envelope = document.querySelector('.envelope');
+const openEnvelopeBtn = document.getElementById('open-envelope-btn');
+const mainContent = document.querySelector('.main-content');
+const wishesSection = document.querySelector('.wishes-animated');
+const birthdayAudio = document.getElementById('birthday-audio');
+
+if (openEnvelopeBtn) {
+    openEnvelopeBtn.addEventListener('click', () => {
+        envelope.classList.add('open');
+        setTimeout(() => {
+            envelopeOverlay.style.opacity = 0;
+            setTimeout(() => {
+                envelopeOverlay.style.display = 'none';
+                if (mainContent) mainContent.style.display = 'block';
+                if (birthdayAudio) {
+                    birthdayAudio.currentTime = 0;
+                    birthdayAudio.play();
+                    birthdayAudio.loop = true;
+                }
+                // Animate wishes section
+                setTimeout(() => {
+                    if (wishesSection) wishesSection.classList.add('show');
+                }, 400);
+            }, 700);
+        }, 900); // Wait for flap animation
     });
 }
-
-function showSlides() {
-    if (images.length === 0) return;
-
-    const slides = document.querySelectorAll('.slide');
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
-    setTimeout(showSlides, 3000); // Change image every 3 seconds
-}
-
-createSlides();
-showSlides();
 
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.fireworks-container');

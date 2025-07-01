@@ -8,22 +8,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="fireworks-container"></div>
-    <div class="container">
-        <div class="slideshow-container">
-            <!-- Images will be added here via JavaScript -->
-        </div>
-        <div class="wishes">
-            <h1>Happy Birthday!</h1>
-            <p>Wishing you a day filled with love, joy, and laughter. May all your dreams come true!</p>
-            <p>With love, from me.</p>
-        </div>
-        <div class="cake-container">
-            <img src="images/cake.svg" alt="Birthday Cake" class="birthday-cake">
+    <div id="envelope-overlay" class="envelope-overlay">
+        <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-front"></div>
+            <div class="envelope-letter">
+                <h2>You've got a birthday letter!</h2>
+                <button id="open-envelope-btn">Open</button>
+            </div>
         </div>
     </div>
-    <audio src="audio/birthday-music.mp3" autoplay loop></audio>
+    <div class="main-content" style="display: none;">
+        <div class="fireworks-container"></div>
+        <div class="container">
+            <div class="stage-slideshow">
+                <div class="stage-light"></div>
+                <div class="stage-base"></div>
+                <div class="stage-image-wrapper">
+                    <img id="stage-image" src="" alt="Birthday Memory" />
+                </div>
+            </div>
+            <div class="wishes wishes-animated">
+                <h1>Happy Birthday!</h1>
+                <p>Wishing you a day filled with love, joy, and laughter. May all your dreams come true!</p>
+                <p>With love, from me.</p>
+            </div>
+            <div class="cake-container">
+                <img src="images/cake.svg" alt="Birthday Cake" class="birthday-cake">
+            </div>
+        </div>
+        <audio id="birthday-audio" src="audio/birthday-music.mp3" preload="auto"></audio>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 

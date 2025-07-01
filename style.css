@@ -1,6 +1,6 @@
 body {
     font-family: 'Georgia', serif;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #ee7752, #7e3ce7, #23a6d5, #23d5ab);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     color: white;
@@ -155,4 +155,233 @@ p {
     50% {
         transform: rotate(1deg);
     }
+}
+
+/* Stage Slideshow Styles */
+.stage-slideshow {
+    position: relative;
+    width: 350px;
+    height: 400px;
+    margin: 2em auto 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: transparent;
+}
+.stage-light {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(ellipse at center, rgba(255,255,200,0.85) 0%, rgba(255,255,255,0.15) 70%, transparent 100%);
+    transform: translate(-50%, 0);
+    z-index: 1;
+    pointer-events: none;
+    filter: blur(12px);
+    animation: light-pulse 2s infinite alternate;
+}
+.stage-base {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 200px;
+    height: 40px;
+    background: radial-gradient(ellipse at center, #e0e0e0 60%, #bdbdbd 100%);
+    border-radius: 50% 50% 60% 60%/60% 60% 100% 100%;
+    box-shadow: 0 10px 40px 0 rgba(0,0,0,0.25);
+    transform: translateX(-50%);
+    z-index: 2;
+}
+.stage-image-wrapper {
+    position: relative;
+    z-index: 3;
+    width: 260px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px 0 rgba(0,0,0,0.25), 0 0 40px 10px #fff7b2;
+    overflow: hidden;
+}
+#stage-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 0 30px 0 rgba(255,255,200,0.5);
+    background: #eee;
+}
+.stage-nav {
+    position: absolute;
+    bottom: 90px;
+    width: 48px;
+    height: 48px;
+    font-size: 2.2em;
+    color: #e73c7e;
+    background: rgba(255,255,255,0.95);
+    border: 2px solid #e73c7e;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 4;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border 0.2s, color 0.2s, transform 0.2s;
+}
+.stage-nav:hover {
+    background: #ffe6f0;
+    color: #fff;
+    border-color: #e73c7e;
+    transform: scale(1.1);
+}
+.stage-nav.prev { left: 10px; }
+.stage-nav.next { right: 10px; }
+
+/* Animation classes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+@keyframes zoomOut {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(1.3); opacity: 0; }
+}
+@keyframes rotateIn {
+    from { transform: rotate(-180deg) scale(0.7); opacity: 0; }
+    to { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+@keyframes slideInLeft {
+    from { transform: translateX(-100%) scale(0.9); opacity: 0; }
+    to { transform: translateX(0) scale(1); opacity: 1; }
+}
+@keyframes slideInRight {
+    from { transform: translateX(100%) scale(0.9); opacity: 0; }
+    to { transform: translateX(0) scale(1); opacity: 1; }
+}
+.fade-in { animation: fadeIn 0.7s; }
+.fade-out { animation: fadeOut 0.7s; }
+.zoom-in { animation: zoomIn 0.7s; }
+.zoom-out { animation: zoomOut 0.7s; }
+.rotate-in { animation: rotateIn 0.7s; }
+.slide-in-left { animation: slideInLeft 0.7s; }
+.slide-in-right { animation: slideInRight 0.7s; }
+
+/* Envelope Overlay Styles */
+.envelope-overlay {
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #f3ec78 0%, #af4261 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.7s;
+}
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    perspective: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.envelope-flap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 60%;
+    background: #fff7b2;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 3;
+    transform-origin: top center;
+    transition: transform 1s cubic-bezier(.77,0,.18,1.01);
+    box-shadow: 0 8px 20px 0 rgba(0,0,0,0.08);
+}
+.envelope.open .envelope-flap {
+    transform: rotateX(-120deg);
+}
+.envelope-front {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 70%;
+    background: #fff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 2;
+    box-shadow: 0 8px 20px 0 rgba(0,0,0,0.10);
+}
+.envelope-letter {
+    position: absolute;
+    top: 30px; left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    background: repeating-linear-gradient(135deg, #fff 0 10px, #f9e7f7 10px 20px);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px 0 rgba(231,60,126,0.10), 0 2px 8px rgba(0,0,0,0.08);
+    padding: 36px 24px 24px 24px;
+    z-index: 4;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.7s 0.3s;
+    border: 2px solid #e73c7e;
+    font-family: 'Great Vibes', cursive, 'Georgia', serif;
+    font-size: 1.5em;
+    color: #af4261;
+    letter-spacing: 1px;
+}
+.envelope-letter h2 {
+    font-family: 'Great Vibes', cursive, 'Georgia', serif;
+    font-size: 2.2em;
+    color: #e73c7e;
+    margin-bottom: 0.5em;
+    margin-top: 0;
+    text-shadow: 0 2px 8px #fff7b2, 0 1px 0 #fff;
+}
+.envelope.open .envelope-letter {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+#open-envelope-btn {
+    margin-top: 18px;
+    padding: 10px 30px;
+    font-size: 1.2em;
+    background: linear-gradient(90deg, #e73c7e 60%, #f3ec78 100%);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    transition: background 0.2s;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+#open-envelope-btn:hover {
+    background: linear-gradient(90deg, #af4261 60%, #f3ec78 100%);
+}
+
+/* Wishes Animation */
+.wishes-animated {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: opacity 0.8s, transform 0.8s;
+}
+.wishes-animated.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 } 
