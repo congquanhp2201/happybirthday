@@ -140,5 +140,5 @@ document.addEventListener('DOMContentLoaded', () => {
     fireworks.start();
     setTimeout(() => {
         fireworks.stop();
-    }, 8000); // Stop fireworks after 8 seconds
+    }, 10000); // Stop fireworks after 8 seconds
 }); 
